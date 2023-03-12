@@ -21,7 +21,7 @@ public class MainActivity extends AppCompatActivity {
 
     private static final String BASE_URL = "https://409f-204-168-129-182.eu.ngrok.io/";
     private TextView textView;
-    private String endpoint = "api/VWO%201/huiswerk";
+    private String endpoint = "api/VWO%201/Tuinboon/cijfers";
 
     public interface MyService {
         @GET
@@ -67,7 +67,7 @@ public class MainActivity extends AppCompatActivity {
                     List<MyObject> objects = response.body();
                     StringBuilder sb = new StringBuilder();
                     for (MyObject object : objects) {
-                        sb.append(object.getSubject() + ": " + object.getDo()).append("\n");
+                        sb.append(object.getSubject() + ": " + object.getMark()).append("\n");
                     }
                     textView.setText(sb);
                 } else {

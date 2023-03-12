@@ -6,6 +6,7 @@ public class MyObject {
     private int id;
     private String subject;
     private String dothis;
+    private String mark;
 
     public String getSubject() {
         return subject;
@@ -14,6 +15,9 @@ public class MyObject {
         return dothis;
     }
 
+    public String getMark() {
+        return mark;
+    }
     public DataClass getData() {
         return data;
     }

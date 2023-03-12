@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -30,9 +31,9 @@ public class Page2Activity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_docent);
 
-        textView = findViewById(R.id.textView);
+        textView = findViewById(R.id.textView2);
 
 
         Retrofit retrofit = new Retrofit.Builder()
@@ -43,17 +44,27 @@ public class Page2Activity extends AppCompatActivity {
 
         RequestUser requestUser = retrofit.create(RequestUser.class);
 
-        requestUser.getUser("3").enqueue(new Callback<MyObject>() {
-            @Override
+        Button myButton = findViewById(R.id.button2);
 
-            public void onResponse(Call<MyObject> call, Response<MyObject> response) {
-                textView.setText(response.body().data.first_name);
-            }
-
+        myButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onFailure(Call<MyObject> call, Throwable t) {
-                textView.setText(t.getMessage());
+            public void onClick(View v) {
+                EditText myEditText = findViewById(R.id.editText);
+                String text = myEditText.getText().toString();
+                requestUser.getUser(text).enqueue(new Callback<MyObject>() {
+                    @Override
+
+                    public void onResponse(Call<MyObject> call, Response<MyObject> response) {
+                        textView.setText("Changed mark to "+text);
+                    }
+
+                    @Override
+                    public void onFailure(Call<MyObject> call, Throwable t) {
+                        //textView.setText(t.getMessage());
+                    }
+                });
             }
         });
+
     }
 }
