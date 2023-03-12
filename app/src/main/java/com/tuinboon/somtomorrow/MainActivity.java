@@ -19,7 +19,7 @@ import retrofit2.http.Url;
 
 public class MainActivity extends AppCompatActivity {
 
-    private static final String BASE_URL = "https://f314-204-168-129-182.eu.ngrok.io/";
+    private static final String BASE_URL = "https://409f-204-168-129-182.eu.ngrok.io/";
     private TextView textView;
     private String endpoint = "api/VWO%201/huiswerk";
 
