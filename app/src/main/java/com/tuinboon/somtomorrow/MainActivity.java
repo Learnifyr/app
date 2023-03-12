@@ -1,6 +1,9 @@
 package com.tuinboon.somtomorrow;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -16,7 +19,7 @@ import retrofit2.http.Url;
 
 public class MainActivity extends AppCompatActivity {
 
-    private static final String BASE_URL = "https://cca6-204-168-129-182.eu.ngrok.io/";
+    private static final String BASE_URL = "https://f314-204-168-129-182.eu.ngrok.io/";
     private TextView textView;
     private String endpoint = "api/VWO%201/huiswerk";
 
@@ -47,6 +50,15 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         textView = findViewById(R.id.textView);
+        Button myButton = findViewById(R.id.button);
+
+        myButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, Page2Activity.class);
+                startActivity(intent);
+            }
+        });
 
         getList(endpoint, new Callback<List<MyObject>>() {
             @Override
