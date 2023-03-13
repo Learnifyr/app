@@ -1,6 +1,5 @@
 package com.tuinboon.somtomorrow;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -9,7 +8,6 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import java.util.List;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -17,9 +15,8 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.http.GET;
 import retrofit2.http.Path;
-import retrofit2.http.Url;
 
-public class Page2Activity extends AppCompatActivity {
+public class Docent extends AppCompatActivity {
     interface RequestUser{
         @GET("api/post/cijfers/VWO%201/Tuinbon/{uid}")
         Call<MyObject> getUser(@Path("uid") String uid);
@@ -44,7 +41,7 @@ public class Page2Activity extends AppCompatActivity {
 
         RequestUser requestUser = retrofit.create(RequestUser.class);
 
-        Button myButton = findViewById(R.id.button2);
+        Button myButton = findViewById(R.id.submitbutton);
 
         myButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -65,6 +62,8 @@ public class Page2Activity extends AppCompatActivity {
                 });
             }
         });
+
+
 
     }
 }

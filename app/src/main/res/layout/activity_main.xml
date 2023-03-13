@@ -27,4 +27,99 @@
         app:layout_constraintTop_toBottomOf="@+id/textView"
         tools:ignore="MissingConstraints" />
 
+    <Button
+        android:id="@+id/menubutton"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:width="379dp"
+        android:insetTop="0dp"
+        android:insetBottom="0dp"
+        app:circularflow_defaultRadius="0dp"
+        app:cornerRadius="25dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/menubar"
+        android:layout_width="379dp"
+        android:layout_height="50dp"
+        android:backgroundTint="#6200ED"
+        android:visibility="visible"
+        app:cardCornerRadius="50dp"
+        app:layout_constraintBottom_toBottomOf="@+id/menubutton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/menubutton"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0">
+
+        <Button
+            android:id="@+id/button1"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="60dp"
+            android:backgroundTint="#FEFEFE"
+            android:insetTop="0dp"
+            android:insetBottom="0dp"
+            app:circularflow_defaultRadius="0dp"
+            app:cornerRadius="25dp" />
+
+        <Button
+            android:id="@+id/button2"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="125dp"
+            android:backgroundTint="#FEFEFE"
+            android:insetTop="0dp"
+            android:insetBottom="0dp"
+            app:circularflow_defaultRadius="0dp"
+            app:cornerRadius="25dp" />
+
+        <Button
+            android:id="@+id/button3"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="190dp"
+            android:backgroundTint="#FEFEFE"
+            android:insetTop="0dp"
+            android:insetBottom="0dp"
+            app:circularflow_defaultRadius="0dp"
+            app:cornerRadius="25dp" />
+
+        <Button
+            android:id="@+id/button4"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="255dp"
+            android:backgroundTint="#FEFEFE"
+            android:insetTop="0dp"
+            android:insetBottom="0dp"
+            android:text="Cijfers"
+            android:textColor="#000000"
+            app:circularflow_defaultRadius="0dp"
+            app:cornerRadius="25dp" />
+
+        <Button
+            android:id="@+id/button5"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="320dp"
+            android:backgroundTint="#FEFEFE"
+            android:insetTop="0dp"
+            android:insetBottom="0dp"
+            android:text="Docent"
+            android:textColor="#000000"
+            app:circularflow_defaultRadius="0dp"
+            app:cornerRadius="25dp" />
+
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="16dp" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
