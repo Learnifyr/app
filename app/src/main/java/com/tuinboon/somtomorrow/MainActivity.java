@@ -88,7 +88,7 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<MyObject> call, Throwable t) {
-                textView.setText(t.getMessage());
+                textView.setText(t.getMessage())
             }
         });
     }
