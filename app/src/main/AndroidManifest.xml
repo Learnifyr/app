@@ -29,7 +29,8 @@
                 android:value="" />
         </activity>
 
-        <activity android:name=".Page2Activity" />
+        <activity android:name=".Cijfers" />
+        <activity android:name=".Docent" />
     </application>
 
 </manifest>

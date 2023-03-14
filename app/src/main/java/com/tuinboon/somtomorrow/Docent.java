@@ -1,5 +1,6 @@
 package com.tuinboon.somtomorrow;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -63,7 +64,15 @@ public class Docent extends AppCompatActivity {
             }
         });
 
+        Button returnbtn = findViewById(R.id.back);
 
+        returnbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Docent.this, MainActivity.class);
+                startActivity(intent);
+            }
+        });
 
     }
 }
