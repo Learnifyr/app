@@ -10,6 +10,8 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 
+import java.util.function.Function;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -20,6 +22,9 @@ import retrofit2.http.Path;
 
 public class MainActivity extends AppCompatActivity {
 
+    private void testThing() {
+        System.out.println("HI");
+    }
     interface RequestUser {
         @GET("api/VWO%201/{uid}")
         Call<MyObject> getUser(@Path("uid") String uid);
@@ -38,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
         CardView myCardView = findViewById(R.id.menubar);
         Button button1 = findViewById(R.id.menubutton);
 
-
+        
         button4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -92,5 +97,6 @@ public class MainActivity extends AppCompatActivity {
                 //eee
             }
         });
+
     }
 }

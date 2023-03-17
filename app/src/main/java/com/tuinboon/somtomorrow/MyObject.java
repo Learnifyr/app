@@ -4,17 +4,14 @@ public class MyObject {
 
     DataClass data;
 
+    String subject, mark;
     public DataClass getData() {
         return data;
     }
 
     class DataClass {
         private int id;
-        private String subject;
-        private String dothis;
-        private String mark;
-
-        private String newest;
+        String subject, dothis, mark, newest;
 
         public String getNews() {
             return newest;
