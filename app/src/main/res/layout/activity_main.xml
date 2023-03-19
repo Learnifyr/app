@@ -28,7 +28,7 @@
         android:layout_width="379dp"
         android:layout_height="50dp"
         android:backgroundTint="#576271"
-        android:visibility="invisible"
+        android:visibility="visible"
         app:cardCornerRadius="50dp"
         app:layout_constraintBottom_toBottomOf="@+id/menubutton"
         app:layout_constraintEnd_toEndOf="parent"
