@@ -48,6 +48,8 @@ public class MainActivity extends AppCompatActivity {
         CardView myCardView = findViewById(R.id.menubar);
         Button button1 = findViewById(R.id.menubutton);
 
+        textView = findViewById(R.id.textView3);
+
         ConstraintLayout backgroundLayout = findViewById(R.id.mainview);
         SharedPreferences sharedPreferences = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
         String myString = ((SharedPreferences) sharedPreferences).getString("hexCode", "");
@@ -56,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
             backgroundLayout.setBackgroundColor(color);
         }
 
-        button3.setOnClickListener(new View.OnClickListener() {
+        textView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, Dev.class);
@@ -94,7 +96,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        textView = findViewById(R.id.textView3);
+
 
 
         Retrofit retrofit = new Retrofit.Builder()

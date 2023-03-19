@@ -108,40 +108,4 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/textView4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="#2E4053"
-        android:text="test"
-        tools:layout_editor_absoluteX="169dp"
-        tools:layout_editor_absoluteY="174dp" />
-
-    <TextView
-        android:id="@+id/textView6"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="#3F5267 "
-        android:text="test"
-        tools:layout_editor_absoluteX="169dp"
-        tools:layout_editor_absoluteY="193dp" />
-
-    <TextView
-        android:id="@+id/textView9"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="#576271"
-        android:text="test"
-        tools:layout_editor_absoluteX="169dp"
-        tools:layout_editor_absoluteY="212dp" />
-
-    <TextView
-        android:id="@+id/textView10"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="#F5F5F5"
-        android:text="test"
-        tools:layout_editor_absoluteX="169dp"
-        tools:layout_editor_absoluteY="231dp" />
-
 </androidx.constraintlayout.widget.ConstraintLayout>
