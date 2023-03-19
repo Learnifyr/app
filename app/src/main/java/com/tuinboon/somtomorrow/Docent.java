@@ -1,6 +1,8 @@
 package com.tuinboon.somtomorrow;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
@@ -36,9 +38,10 @@ public class Docent extends AppCompatActivity {
         textView = findViewById(R.id.textView2);
 
         ConstraintLayout backgroundLayout = findViewById(R.id.docentview);
-        String hexCode = Dev.hexCode;
-        if (hexCode != null) {
-            int color = Color.parseColor(hexCode);
+        SharedPreferences sharedPreferences = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
+        String myString = ((SharedPreferences) sharedPreferences).getString("hexCode", "");
+        if (myString != null) {
+            int color = Color.parseColor(myString);
             backgroundLayout.setBackgroundColor(color);
         }
 

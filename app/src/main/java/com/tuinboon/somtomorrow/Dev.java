@@ -1,6 +1,8 @@
 package com.tuinboon.somtomorrow;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -23,11 +25,23 @@ public class Dev extends AppCompatActivity {
         EditText color2 = findViewById(R.id.color2);
 
         Button submit = findViewById(R.id.submit2);
+        Button backbtn = findViewById(R.id.backbtn);
 
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                hexCode = color1.getText().toString();
+                SharedPreferences sharedPreferences = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.putString("hexCode", color1.getText().toString());
+                editor.apply();
+            }
+        });
+
+        backbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Dev.this, MainActivity.class);
+                startActivity(intent);
             }
         });
     }

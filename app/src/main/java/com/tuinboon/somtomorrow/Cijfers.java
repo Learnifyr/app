@@ -2,7 +2,9 @@ package com.tuinboon.somtomorrow;
 
 import com.tuinboon.somtomorrow.Dev;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
@@ -60,9 +62,10 @@ public class Cijfers extends AppCompatActivity {
         textView = findViewById(R.id.textView);
 
         ConstraintLayout backgroundLayout = findViewById(R.id.cijferview);
-        String hexCode = Dev.hexCode;
-        if (hexCode != null) {
-            int color = Color.parseColor(hexCode);
+        SharedPreferences sharedPreferences = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
+        String myString = ((SharedPreferences) sharedPreferences).getString("hexCode", "");
+        if (myString != null) {
+            int color = Color.parseColor(myString);
             backgroundLayout.setBackgroundColor(color);
         }
 
