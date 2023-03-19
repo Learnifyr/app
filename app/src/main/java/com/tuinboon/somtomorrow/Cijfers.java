@@ -1,6 +1,9 @@
 package com.tuinboon.somtomorrow;
 
+import com.tuinboon.somtomorrow.Dev;
+
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -8,6 +11,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 import java.util.List;
 
@@ -20,6 +24,9 @@ import retrofit2.http.GET;
 import retrofit2.http.Url;
 
 public class Cijfers extends AppCompatActivity {
+
+
+
     private static final String BASE_URL = "https://409f-204-168-129-182.eu.ngrok.io/";
     private TextView textView;
     private String endpoint = "api/VWO%201/Tuinboon/cijfers";
@@ -52,6 +59,13 @@ public class Cijfers extends AppCompatActivity {
 
         textView = findViewById(R.id.textView);
 
+        ConstraintLayout backgroundLayout = findViewById(R.id.cijferview);
+        String hexCode = Dev.hexCode;
+        if (hexCode != null) {
+            int color = Color.parseColor(hexCode);
+            backgroundLayout.setBackgroundColor(color);
+        }
+
         getList(endpoint, new Callback<List<MyObject>>() {
             @Override
             public void onResponse(Call<List<MyObject>> call, Response<List<MyObject>> response) {
@@ -70,7 +84,7 @@ public class Cijfers extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<List<MyObject>> call, Throwable t) {
-                textView.setText("Error: " + t.getMessage());
+                textView.setText("Error getting data please check for any errors");
             }
         });
 

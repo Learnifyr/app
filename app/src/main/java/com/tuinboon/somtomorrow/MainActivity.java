@@ -1,6 +1,7 @@
 package com.tuinboon.somtomorrow;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -9,6 +10,7 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 import java.util.function.Function;
 
@@ -37,13 +39,27 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        Button button3 = findViewById(R.id.button3);
         Button button4 = findViewById(R.id.button4);
         Button button5 = findViewById(R.id.button5);
 
         CardView myCardView = findViewById(R.id.menubar);
         Button button1 = findViewById(R.id.menubutton);
 
-        
+        ConstraintLayout backgroundLayout = findViewById(R.id.mainview);
+        String hexCode = Dev.hexCode;
+        if (hexCode != null) {
+            int color = Color.parseColor(hexCode);
+            backgroundLayout.setBackgroundColor(color);
+        }
+
+        button3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, Dev.class);
+                startActivity(intent);
+            }
+        });
         button4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -93,7 +109,7 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<MyObject> call, Throwable t) {
-                textView.setText(t.getMessage());
+                textView.setText("Error getting data please check for any errors");
                 //eee
             }
         });

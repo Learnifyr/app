@@ -31,6 +31,7 @@
 
         <activity android:name=".Cijfers" />
         <activity android:name=".Docent" />
+        <activity android:name=".Dev" />
     </application>
 
 </manifest>

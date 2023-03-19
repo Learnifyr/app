@@ -1,6 +1,7 @@
 package com.tuinboon.somtomorrow;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -8,6 +9,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -33,6 +35,12 @@ public class Docent extends AppCompatActivity {
 
         textView = findViewById(R.id.textView2);
 
+        ConstraintLayout backgroundLayout = findViewById(R.id.docentview);
+        String hexCode = Dev.hexCode;
+        if (hexCode != null) {
+            int color = Color.parseColor(hexCode);
+            backgroundLayout.setBackgroundColor(color);
+        }
 
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("https://409f-204-168-129-182.eu.ngrok.io/")
