@@ -60,12 +60,16 @@ public class Cijfers extends AppCompatActivity {
         setContentView(R.layout.activity_cijfers);
 
         textView = findViewById(R.id.textView);
+        Button returnbtn = findViewById(R.id.back2);
 
         ConstraintLayout backgroundLayout = findViewById(R.id.cijferview);
         SharedPreferences sharedPreferences = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
         String myString = ((SharedPreferences) sharedPreferences).getString("hexCode", "");
+        String myString2 = ((SharedPreferences) sharedPreferences).getString("hexCode2", "");
         if (myString != null) {
             int color = Color.parseColor(myString);
+            int color2 = Color.parseColor(myString2);
+            returnbtn.setBackgroundColor(color2);
             backgroundLayout.setBackgroundColor(color);
         }
 
@@ -91,7 +95,7 @@ public class Cijfers extends AppCompatActivity {
             }
         });
 
-        Button returnbtn = findViewById(R.id.back2);
+
 
         returnbtn.setOnClickListener(new View.OnClickListener() {
             @Override

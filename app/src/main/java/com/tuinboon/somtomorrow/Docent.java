@@ -36,12 +36,20 @@ public class Docent extends AppCompatActivity {
         setContentView(R.layout.activity_docent);
 
         textView = findViewById(R.id.textView2);
+        Button myButton = findViewById(R.id.submitbutton);
+        Button returnbtn = findViewById(R.id.back);
+
+
 
         ConstraintLayout backgroundLayout = findViewById(R.id.docentview);
         SharedPreferences sharedPreferences = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
         String myString = ((SharedPreferences) sharedPreferences).getString("hexCode", "");
+        String myString2 = ((SharedPreferences) sharedPreferences).getString("hexCode2", "");
         if (myString != null) {
             int color = Color.parseColor(myString);
+            int color2 = Color.parseColor(myString2);
+            returnbtn.setBackgroundColor(color2);
+            myButton.setBackgroundColor(color2);
             backgroundLayout.setBackgroundColor(color);
         }
 
@@ -53,7 +61,7 @@ public class Docent extends AppCompatActivity {
 
         RequestUser requestUser = retrofit.create(RequestUser.class);
 
-        Button myButton = findViewById(R.id.submitbutton);
+
 
         myButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -75,7 +83,7 @@ public class Docent extends AppCompatActivity {
             }
         });
 
-        Button returnbtn = findViewById(R.id.back);
+
 
         returnbtn.setOnClickListener(new View.OnClickListener() {
             @Override

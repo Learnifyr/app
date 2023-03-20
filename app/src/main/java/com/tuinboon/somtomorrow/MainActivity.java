@@ -3,6 +3,7 @@ package com.tuinboon.somtomorrow;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
@@ -53,10 +54,15 @@ public class MainActivity extends AppCompatActivity {
         ConstraintLayout backgroundLayout = findViewById(R.id.mainview);
         SharedPreferences sharedPreferences = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
         String myString = ((SharedPreferences) sharedPreferences).getString("hexCode", "");
+        String myString2 = ((SharedPreferences) sharedPreferences).getString("hexCode2", "");
         if (myString != null) {
             int color = Color.parseColor(myString);
+            int color2 = Color.parseColor(myString2);
+            myCardView.setBackgroundTintList(ColorStateList.valueOf(color2));
+            button1.setBackgroundColor(color2);
             backgroundLayout.setBackgroundColor(color);
         }
+
 
         textView.setOnClickListener(new View.OnClickListener() {
             @Override
