@@ -43,8 +43,8 @@
             android:backgroundTint="#FEFEFE"
             android:insetTop="0dp"
             android:insetBottom="0dp"
-            android:visibility="visible"
-            app:circularflow_defaultRadius="0dp"
+            android:text="Ouders"
+            android:textColor="#000000"
             app:cornerRadius="25dp" />
 
         <Button
@@ -55,7 +55,6 @@
             android:backgroundTint="#FEFEFE"
             android:insetTop="0dp"
             android:insetBottom="0dp"
-            app:circularflow_defaultRadius="0dp"
             app:cornerRadius="25dp" />
 
         <Button
@@ -66,7 +65,8 @@
             android:backgroundTint="#FEFEFE"
             android:insetTop="0dp"
             android:insetBottom="0dp"
-            app:circularflow_defaultRadius="0dp"
+            android:text="Huiswerk"
+            android:textColor="#000000"
             app:cornerRadius="25dp" />
 
         <Button
@@ -79,7 +79,6 @@
             android:insetBottom="0dp"
             android:text="Cijfers"
             android:textColor="#000000"
-            app:circularflow_defaultRadius="0dp"
             app:cornerRadius="25dp" />
 
         <Button
@@ -92,7 +91,6 @@
             android:insetBottom="0dp"
             android:text="Docent"
             android:textColor="#000000"
-            app:circularflow_defaultRadius="0dp"
             app:cornerRadius="25dp" />
 
     </androidx.cardview.widget.CardView>
@@ -101,8 +99,8 @@
         android:id="@+id/textView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="TextView"
-        android:textColor="@android:color/black"
+        android:textColor="@android:color/white"
+        android:textSize="60sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

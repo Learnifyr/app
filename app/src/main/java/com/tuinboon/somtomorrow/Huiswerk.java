@@ -1,13 +1,10 @@
 package com.tuinboon.somtomorrow;
 
-import com.tuinboon.somtomorrow.Dev;
-
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -15,30 +12,20 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
-import java.util.List;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
-import retrofit2.http.GET;
-import retrofit2.http.Url;
-
-public class Cijfers extends AppCompatActivity {
-
-    private TextView textView;
-
-
+public class Huiswerk extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_cijfers);
+        setContentView(R.layout.activity_huiswerk);
 
-        textView = findViewById(R.id.textView);
-        Button returnbtn = findViewById(R.id.back2);
+        TextView textView = findViewById(R.id.textView4);
 
-        ConstraintLayout backgroundLayout = findViewById(R.id.cijferview);
+        Button returnbtn = findViewById(R.id.back3);
+
+        DoRequest request = new DoRequest();
+        request.getHomework("api/VWO1/huiswerk", textView);
+
+        ConstraintLayout backgroundLayout = findViewById(R.id.huiswerkview);
         SharedPreferences sharedPreferences = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
         String myString = ((SharedPreferences) sharedPreferences).getString("hexCode", "");
         String myString2 = ((SharedPreferences) sharedPreferences).getString("hexCode2", "");
@@ -49,15 +36,10 @@ public class Cijfers extends AppCompatActivity {
             backgroundLayout.setBackgroundColor(color);
         }
 
-        DoRequest request = new DoRequest();
-        request.getMark("api/VWO1/Tuinboon/cijfers", textView);
-
-
-
         returnbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Cijfers.this, MainActivity.class);
+                Intent intent = new Intent(Huiswerk.this, MainActivity.class);
                 startActivity(intent);
             }
         });

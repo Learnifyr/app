@@ -1,4 +1,5 @@
 package com.tuinboon.somtomorrow;
+import com.tuinboon.somtomorrow.Huiswerk;
 
 import android.content.Context;
 import android.content.Intent;
@@ -15,25 +16,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
-import java.util.function.Function;
+import org.w3c.dom.Text;
 
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
-import retrofit2.http.GET;
-import retrofit2.http.Path;
 
 public class MainActivity extends AppCompatActivity {
 
-    private void testThing() {
-        System.out.println("HI");
-    }
-    interface RequestUser {
-        @GET("api/VWO%201/{uid}")
-        Call<MyObject> getUser(@Path("uid") String uid);
-    }
     public boolean trigger = true;
 
     TextView textView;
@@ -42,14 +29,22 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        DoRequest request = new DoRequest();
+
+        Button button1 = findViewById(R.id.button1);
         Button button3 = findViewById(R.id.button3);
         Button button4 = findViewById(R.id.button4);
         Button button5 = findViewById(R.id.button5);
 
         CardView myCardView = findViewById(R.id.menubar);
-        Button button1 = findViewById(R.id.menubutton);
+        Button menubutton = findViewById(R.id.menubutton);
 
         textView = findViewById(R.id.textView3);
+
+
+
+        request.DoNormalRequest("api/VWO1/news", textView);
+
 
         ConstraintLayout backgroundLayout = findViewById(R.id.mainview);
         SharedPreferences sharedPreferences = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
@@ -71,6 +66,21 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        button1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, Ouders.class);
+                startActivity(intent);
+            }
+        });
+        button3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, Huiswerk.class);
+                startActivity(intent);
+            }
+        });
         button4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -87,7 +97,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
-        button1.setOnClickListener(new View.OnClickListener() {
+        menubutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (trigger) {
@@ -99,29 +109,6 @@ public class MainActivity extends AppCompatActivity {
                     myCardView.setVisibility(View.GONE);
                     trigger = true;
                 }
-            }
-        });
-
-
-
-
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("https://409f-204-168-129-182.eu.ngrok.io/")
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-
-        RequestUser requestUser = retrofit.create(RequestUser.class);
-
-        requestUser.getUser("news").enqueue(new Callback<MyObject>() {
-            @Override
-            public void onResponse(Call<MyObject> call, Response<MyObject> response) {
-                textView.setText(response.body().data.getNews());
-            }
-
-            @Override
-            public void onFailure(Call<MyObject> call, Throwable t) {
-                textView.setText("Error getting data please check for any errors");
-                //eee
             }
         });
 

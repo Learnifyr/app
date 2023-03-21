@@ -41,7 +41,7 @@ public class Docent extends AppCompatActivity {
 
 
 
-        ConstraintLayout backgroundLayout = findViewById(R.id.docentview);
+        ConstraintLayout backgroundLayout = findViewById(R.id.huiswerkview);
         SharedPreferences sharedPreferences = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
         String myString = ((SharedPreferences) sharedPreferences).getString("hexCode", "");
         String myString2 = ((SharedPreferences) sharedPreferences).getString("hexCode2", "");

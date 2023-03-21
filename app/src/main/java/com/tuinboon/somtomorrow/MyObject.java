@@ -4,7 +4,7 @@ public class MyObject {
 
     DataClass data;
 
-    String subject, mark;
+    String subject, dothis, mark, token;
     public DataClass getData() {
         return data;
     }
