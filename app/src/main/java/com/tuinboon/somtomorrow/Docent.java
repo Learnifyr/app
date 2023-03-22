@@ -23,7 +23,7 @@ import retrofit2.http.Path;
 
 public class Docent extends AppCompatActivity {
     interface RequestUser{
-        @GET("api/post/cijfers/VWO%201/Tuinbon/{uid}")
+        @GET("api/post/cijfers/VWO1/Tuinboon/{uid}")
         Call<MyObject> getUser(@Path("uid") String uid);
 
     }
@@ -54,7 +54,7 @@ public class Docent extends AppCompatActivity {
         }
 
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("https://409f-204-168-129-182.eu.ngrok.io/")
+                .baseUrl("https://b328-204-168-129-182.eu.ngrok.io/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 

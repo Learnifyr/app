@@ -13,8 +13,12 @@ import android.widget.EditText;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.security.Key;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class Dev extends AppCompatActivity {
+    List<Integer> keys = new ArrayList<Integer>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,11 +65,16 @@ public class Dev extends AppCompatActivity {
     }
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
-        if (keyCode == KeyEvent.KEYCODE_VOLUME_UP) {
+        Log.d("test", String.valueOf(keyCode));
+        keys.add(keyCode);
+        List<Integer> code = Arrays.asList(24, 24, 25, 25, 4);
+        Log.d(keys.toString(), code.toString());
+        if (keys.equals(code)) {
+            Log.d("MATCH", "MATCH");
             Intent intent = new Intent(Dev.this, testClass.class);
             startActivity(intent);
-            return true;
+
         }
-        return super.onKeyDown(keyCode, event);
+        return true;
     }
 }

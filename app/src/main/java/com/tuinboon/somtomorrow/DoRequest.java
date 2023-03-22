@@ -29,11 +29,10 @@ public class DoRequest {
             .baseUrl(BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
             .build();
-    public void DoNormalRequest(String endpoint, TextView textView) {
 
-        RequestUser requestUser = retrofit.create(RequestUser.class);
-        Call<MyObject> call = requestUser.getUser(endpoint);
-        call.enqueue(new Callback<MyObject>() {
+    PostThing requestUser = retrofit.create(PostThing.class);
+    public void DoNormalRequest(String endpoint, TextView textView) {
+        requestUser.getUser(endpoint).enqueue(new Callback<MyObject>() {
             @Override
             public void onResponse(Call<MyObject> call, Response<MyObject> response) {
                 if (response.isSuccessful()) {
@@ -55,10 +54,7 @@ public class DoRequest {
         });
     }
 
-    public interface RequestUser {
-        @GET("{endpoint}")
-        Call<MyObject> getUser(@Path("endpoint") String endpoint);
-    }
+
 
 
     public void getHomework(String endpoint, TextView textView) {
@@ -87,15 +83,11 @@ public class DoRequest {
         });
     }
 
-    public interface MyService {
-        @GET
-        Call<List<MyObject>> getList(@Url String url);
-    }
 
 
     public void getMark(String endpoint, TextView textView) {
 
-        MyService2 myService = retrofit.create(MyService2.class);
+        MyService myService = retrofit.create(MyService.class);
         Call<List<MyObject>> call = myService.getList(BASE_URL + endpoint);
         call.enqueue(new Callback<List<MyObject>>() {
             @Override
@@ -122,10 +114,6 @@ public class DoRequest {
         });
     }
 
-    public interface MyService2 {
-        @GET
-        Call<List<MyObject>> getList(@Url String url);
-    }
 
 
     public void test(String endpoint, String username, String password, Context context) {
@@ -166,10 +154,6 @@ public class DoRequest {
         });
     }
 
-    public interface test {
-        @GET()
-        Call<MyObject> getList(@Header("username") String user, @Header("password") String pass, @Url String url);
-    }
 
     public void PushRequest(String endpoint, String input, Context context) {
 
@@ -206,25 +190,44 @@ public class DoRequest {
         call.enqueue(new Callback<MyObject>() {
             @Override
             public void onResponse(Call<MyObject> call, Response<MyObject> response) {
-                if (response.isSuccessful()) {
-                    MyObject myObject = response.body();
-                    callback.onSuccess(myObject);
-                } else {
-                    Log.d("Ey", "Request failed with code: " + response.code());
-                }
+                handle_response(call, response);
             }
 
             @Override
             public void onFailure(Call<MyObject> call, Throwable t) {
-                Log.d("Ey", "Error getting data: " + t.getMessage());
+                handle_fail(call, t);
             }
         });
     }
 
+    public void handle_response(Call<MyObject> callback, Response<MyObject> response) {
+        if (response.isSuccessful()) {
+            MyObject myObject = response.body();
+        } else {
+            Log.d("Ey", "Request failed with code: " + response.code());
+        }
+    }
+
+    public void handle_fail(Call<MyObject> callback, Throwable t) {
+        Log.d("Ey", "Error getting data: " + t.getMessage());
+    }
 
     public interface MyObjectCallback {
         void onSuccess(MyObject result);
         void onError(Throwable error);
+    }
+
+
+
+    public interface MyService {
+        @GET
+        Call<List<MyObject>> getList(@Url String url);
+    }
+
+
+    public interface test {
+        @GET()
+        Call<MyObject> getList(@Header("username") String user, @Header("password") String pass, @Url String url);
     }
 
     interface PostThing{
