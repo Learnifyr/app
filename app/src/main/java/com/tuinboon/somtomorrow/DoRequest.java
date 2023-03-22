@@ -24,11 +24,12 @@ public class DoRequest {
     public String user;
     public String pass;
     public ArrayList myList;
+
+    public Retrofit retrofit = new Retrofit.Builder()
+            .baseUrl(BASE_URL)
+            .addConverterFactory(GsonConverterFactory.create())
+            .build();
     public void DoNormalRequest(String endpoint, TextView textView) {
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(BASE_URL)
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
 
         RequestUser requestUser = retrofit.create(RequestUser.class);
         Call<MyObject> call = requestUser.getUser(endpoint);
@@ -60,13 +61,7 @@ public class DoRequest {
     }
 
 
-
     public void getHomework(String endpoint, TextView textView) {
-
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(BASE_URL)
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
 
         MyService myService = retrofit.create(MyService.class);
         Call<List<MyObject>> call = myService.getList(BASE_URL + endpoint);
@@ -99,10 +94,6 @@ public class DoRequest {
 
 
     public void getMark(String endpoint, TextView textView) {
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(BASE_URL)
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
 
         MyService2 myService = retrofit.create(MyService2.class);
         Call<List<MyObject>> call = myService.getList(BASE_URL + endpoint);
@@ -137,14 +128,9 @@ public class DoRequest {
     }
 
 
-
-    public void test(String endpoint, TextView textView, String username, String password, Context context) {
+    public void test(String endpoint, String username, String password, Context context) {
         user = username;
         pass = password;
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(BASE_URL)
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
 
         test requestUser = retrofit.create(test.class);
         Call<MyObject> call = requestUser.getList(username, password, BASE_URL + endpoint);
@@ -154,11 +140,10 @@ public class DoRequest {
                 if (response.isSuccessful()) {
                     MyObject myObject = response.body();
                     if (myObject != null && myObject.token != null) {
-                        Log.d("test", myObject.token);
                         if ("No valid credentials".equals(myObject.token)) {
-                            textView.setText(myObject.token);
+                            Log.d("test",myObject.token);
                         } else {
-                            SharedPreferences sharedPreferences = context.getSharedPreferences("myPrefs", Context.MODE_PRIVATE);
+                            SharedPreferences sharedPreferences = context.getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
                             SharedPreferences.Editor editor = sharedPreferences.edit();
                             editor.putString("token", myObject.token);
                             editor.apply();
@@ -167,16 +152,16 @@ public class DoRequest {
                             context.startActivity(newIntent);
                         }
                     } else {
-                        textView.setText("Response is empty");
+                        Log.d("test","Response is empty");
                     }
                 } else {
-                    textView.setText("Request failed with code: " + response.code());
+                    Log.d("test","Request failed with code: " + response.code());
                 }
             }
 
             @Override
             public void onFailure(Call<MyObject> call, Throwable t) {
-                textView.setText("Error getting data: " + t.getMessage());
+                Log.d("test","Error getting data: " + t.getMessage());
             }
         });
     }
@@ -185,4 +170,72 @@ public class DoRequest {
         @GET()
         Call<MyObject> getList(@Header("username") String user, @Header("password") String pass, @Url String url);
     }
+
+    public void PushRequest(String endpoint, String input, Context context) {
+
+
+
+        PostThing requestUser = retrofit.create(PostThing.class);
+        Log.d("test", endpoint+"/"+input);
+        requestUser.getUser(endpoint+"/"+input).enqueue(new Callback<MyObject>() {
+            @Override
+
+            public void onResponse(Call<MyObject> call, Response<MyObject> response) {
+                MyObject myObject = response.body();
+                if ("Token valid".equals(myObject.response)) {
+                    Log.d("test", String.valueOf(myObject.response));
+                } else {
+                    Intent newIntent = new Intent(context, Login.class);
+                    newIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    context.startActivity(newIntent);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<MyObject> call, Throwable t) {
+                //textView.setText(t.getMessage());
+            }
+        });
+    }
+
+
+
+    public void hi(MyObjectCallback callback) {
+        Help requestUser = retrofit.create(Help.class);
+        Call<MyObject> call = requestUser.getUser("a");
+        call.enqueue(new Callback<MyObject>() {
+            @Override
+            public void onResponse(Call<MyObject> call, Response<MyObject> response) {
+                if (response.isSuccessful()) {
+                    MyObject myObject = response.body();
+                    callback.onSuccess(myObject);
+                } else {
+                    Log.d("Ey", "Request failed with code: " + response.code());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<MyObject> call, Throwable t) {
+                Log.d("Ey", "Error getting data: " + t.getMessage());
+            }
+        });
+    }
+
+
+    public interface MyObjectCallback {
+        void onSuccess(MyObject result);
+        void onError(Throwable error);
+    }
+
+    interface PostThing{
+        @GET("{endpoint}")
+        Call<MyObject> getUser(@Path("endpoint") String endpoint);
+
+    }
+    interface Help{
+        @GET("token/{endpoint}")
+        Call<MyObject> getUser(@Path("endpoint") String endpoint);
+
+    }
+
 }

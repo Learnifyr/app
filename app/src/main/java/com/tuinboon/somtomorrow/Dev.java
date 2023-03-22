@@ -62,7 +62,7 @@ public class Dev extends AppCompatActivity {
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_VOLUME_UP) {
-            Intent intent = new Intent(Dev.this, Login.class);
+            Intent intent = new Intent(Dev.this, testClass.class);
             startActivity(intent);
             return true;
         }

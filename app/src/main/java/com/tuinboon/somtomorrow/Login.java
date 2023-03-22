@@ -23,8 +23,6 @@ public class Login extends AppCompatActivity {
 
         Button confirmbtn = findViewById(R.id.confirmbtn);
 
-        TextView testView = findViewById(R.id.textView7);
-
         DoRequest request = new DoRequest();
 
         confirmbtn.setOnClickListener(new View.OnClickListener() {
@@ -33,7 +31,7 @@ public class Login extends AppCompatActivity {
                 String user = String.valueOf(username.getText());
                 String pass = String.valueOf(password.getText());
                 if (user != null && pass != null) {
-                    request.test("test", testView, user, pass, getBaseContext());
+                    request.test("test", user, pass, getBaseContext());
                 }
             }
         });

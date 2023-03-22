@@ -41,20 +41,22 @@ public class MainActivity extends AppCompatActivity {
 
         textView = findViewById(R.id.textView3);
 
-
+        SharedPreferences sharedPreferences = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
+        String token = ((SharedPreferences) sharedPreferences).getString("token", "a");
+        Log.d("test", token);
+        request.PushRequest("token", token, getBaseContext());
 
         request.DoNormalRequest("api/VWO1/news", textView);
 
 
         ConstraintLayout backgroundLayout = findViewById(R.id.mainview);
-        SharedPreferences sharedPreferences = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
-        String myString = ((SharedPreferences) sharedPreferences).getString("hexCode", "");
-        String myString2 = ((SharedPreferences) sharedPreferences).getString("hexCode2", "");
-        if (myString != null) {
+        String myString = ((SharedPreferences) sharedPreferences).getString("hexCode", "#000000");
+        String myString2 = ((SharedPreferences) sharedPreferences).getString("hexCode2", "#000000");
+        if (myString != null && myString2 != null) {
             int color = Color.parseColor(myString);
             int color2 = Color.parseColor(myString2);
             myCardView.setBackgroundTintList(ColorStateList.valueOf(color2));
-            button1.setBackgroundColor(color2);
+            menubutton.setBackgroundColor(color2);
             backgroundLayout.setBackgroundColor(color);
         }
 
