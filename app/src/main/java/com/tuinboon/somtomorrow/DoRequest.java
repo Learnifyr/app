@@ -30,9 +30,9 @@ public class DoRequest {
             .addConverterFactory(GsonConverterFactory.create())
             .build();
 
-    PostThing requestUser = retrofit.create(PostThing.class);
+    getItemInterface requestUser = retrofit.create(getItemInterface.class);
     public void DoNormalRequest(String endpoint, TextView textView) {
-        requestUser.getUser(endpoint).enqueue(new Callback<MyObject>() {
+        requestUser.getItem(endpoint).enqueue(new Callback<MyObject>() {
             @Override
             public void onResponse(Call<MyObject> call, Response<MyObject> response) {
                 if (response.isSuccessful()) {
@@ -114,6 +114,32 @@ public class DoRequest {
         });
     }
 
+    public void PushRequest(String endpoint, String input, Context context) {
+
+
+
+        getItemInterface requestUser = retrofit.create(getItemInterface.class);
+        Log.d("test", endpoint+"/"+input);
+        requestUser.getItem(BASE_URL + endpoint+"/"+input).enqueue(new Callback<MyObject>() {
+            @Override
+
+            public void onResponse(Call<MyObject> call, Response<MyObject> response) {
+                MyObject myObject = response.body();
+                if ("Token valid".equals(myObject.response)) {
+                    Log.d("test", String.valueOf(myObject.response));
+                } else {
+                    Intent newIntent = new Intent(context, Login.class);
+                    newIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    context.startActivity(newIntent);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<MyObject> call, Throwable t) {
+                //textView.setText(t.getMessage());
+            }
+        });
+    }
 
 
     public void test(String endpoint, String username, String password, Context context) {
@@ -155,38 +181,13 @@ public class DoRequest {
     }
 
 
-    public void PushRequest(String endpoint, String input, Context context) {
 
-
-
-        PostThing requestUser = retrofit.create(PostThing.class);
-        Log.d("test", endpoint+"/"+input);
-        requestUser.getUser(endpoint+"/"+input).enqueue(new Callback<MyObject>() {
-            @Override
-
-            public void onResponse(Call<MyObject> call, Response<MyObject> response) {
-                MyObject myObject = response.body();
-                if ("Token valid".equals(myObject.response)) {
-                    Log.d("test", String.valueOf(myObject.response));
-                } else {
-                    Intent newIntent = new Intent(context, Login.class);
-                    newIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    context.startActivity(newIntent);
-                }
-            }
-
-            @Override
-            public void onFailure(Call<MyObject> call, Throwable t) {
-                //textView.setText(t.getMessage());
-            }
-        });
-    }
 
 
 
     public void hi(MyObjectCallback callback) {
-        Help requestUser = retrofit.create(Help.class);
-        Call<MyObject> call = requestUser.getUser("a");
+        getItemInterface requestUser = retrofit.create(getItemInterface.class);
+        Call<MyObject> call = requestUser.getItem(BASE_URL + "token/a");
         call.enqueue(new Callback<MyObject>() {
             @Override
             public void onResponse(Call<MyObject> call, Response<MyObject> response) {
@@ -198,6 +199,10 @@ public class DoRequest {
                 handle_fail(call, t);
             }
         });
+    }
+
+    public void merge() {
+
     }
 
     public void handle_response(Call<MyObject> callback, Response<MyObject> response) {
@@ -224,21 +229,16 @@ public class DoRequest {
         Call<List<MyObject>> getList(@Url String url);
     }
 
+    interface getItemInterface{
+        @GET
+        Call<MyObject> getItem(@Url String url);
+
+    }
+
 
     public interface test {
         @GET()
         Call<MyObject> getList(@Header("username") String user, @Header("password") String pass, @Url String url);
-    }
-
-    interface PostThing{
-        @GET("{endpoint}")
-        Call<MyObject> getUser(@Path("endpoint") String endpoint);
-
-    }
-    interface Help{
-        @GET("token/{endpoint}")
-        Call<MyObject> getUser(@Path("endpoint") String endpoint);
-
     }
 
 }
